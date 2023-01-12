@@ -10,12 +10,12 @@ const locationSchema = new Schema({
         current.getMonth(),current.getDate(),current.getHours(), 
         current.getMinutes(),current.getSeconds()))
     },
-    lat: {
+    latitude: {
         type: String,
         required: true,
         default: ''
     },
-    lng: {
+    longitude: {
         type: String,
         required: true,
         default: ''

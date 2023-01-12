@@ -3,8 +3,8 @@ const Locations = require('../models/locations.model');
 async function addLocation(req, res) {
     try {
         const location = await Locations.create({
-            lat: req.body.lat,
-            lng: req.body.lng,
+            latitude: req.body.latitude,
+            longitude: req.body.longitude,
         });
         res.status(201).json({
             location: location,
