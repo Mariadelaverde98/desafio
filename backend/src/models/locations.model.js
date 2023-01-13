@@ -6,7 +6,7 @@ const locationSchema = new Schema({
     date: {
         type: Date,
         required: true,
-        default:  new Date(Date.UTC(current.getFullYear(), 
+        default: new Date(Date.UTC(current.getFullYear(), 
         current.getMonth(),current.getDate(),current.getHours(), 
         current.getMinutes(),current.getSeconds()))
     },
