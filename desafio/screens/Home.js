@@ -7,13 +7,17 @@ import { createStackNavigator } from '@react-navigation/native-stack';
 import { createDrawerNavigator } from '@react-navigation/drawer'
 import MapView, { Marker } from 'react-native-maps';
 import * as Location from 'expo-location';
+import Map from '../components/Map';
+import TextNoEstasSola from '../components/TextNoEstasSola';
+import ScreenInfo from '../components/ScreenInfo';
+import Container from '../components/Container';
 
 const Home = () => {
     const [refresh, setRefresh] = useState(false)
-    const [isUserLocation, setIsUserLocation] = useState(false);
+    const [isMarker, setIsMarker] = useState(false)
     const [mapRegion, setMapRegion] = useState({
-        latitude: 37.7882,
-        longitude: -122.4324,
+        latitude: 40.920320,
+        longitude: -3.638262,
         latitudeDelta: 0.0922,
         longitudeDelta: 0.0421,
     })
@@ -31,24 +35,14 @@ const Home = () => {
             longitudeDelta: 0.0421,
         })
         console.log(location.coords.latitude, location.coords.longitude)
-        setIsUserLocation(true)
     }
 
-    // async function getLocation() {
-    //     await userLocation()
-    //     addLocation(mapRegion)
-    // }
-    
     async function refreshing() {
         setRefresh(true)
+        setIsMarker(true)
         await userLocation()
         addLocation(mapRegion)
     }
-
-    // useEffect(() => {
-    //     getLocation()
-    //     setIsUserLocation(false)
-    // }, []);
 
     return (
         <View style={styles.container}>
@@ -63,43 +57,29 @@ const Home = () => {
                     }}
                 />}
             >
-                <MapView
-                    style={styles.map}
-                    region={mapRegion}>
-                    <Marker
-                        title='Marker'
-                        coordinate={mapRegion}
-                    />
-                </MapView>
-                <Text style={styles.contentTitle}>En la Sierra Norte no estás sola</Text>
-                <Text style={styles.contentText}>Este programa asistencial te ofrece toda la información y los recursos de los que dispones si eres víctima de violencia de género de forma totalmente confidencial. </Text>
+                <Map mapRegion={mapRegion} isMarker={isMarker} />
+                <TextNoEstasSola>
+                    EN LA SIERRA NORTE NO ESTÁS SOLA
+                </TextNoEstasSola>
+                <ScreenInfo>
+                    Programa asistencial para mujeres víctimas de violencia de género en la Sierra Norte de Madrid.
+                </ScreenInfo>
 
-                <TouchableOpacity style={styles.button}>
-                    <Text style={styles.buttonTitle}>Derechos y recursos disponibles para las víctimas.</Text>
-                    <Image
-                        style={styles.buttonImg}
-                        source={require('../img/logo_cruz_roja.jpg')}
-                    />
-                    <Text style={styles.buttonInfo}>En este apartado encontrarás todos los recursos a tu disposición.</Text>
-                </TouchableOpacity>
+                <Container title={'Derechos y recursos disponibles para las víctimas.'} buttonText={'VER MÁS'} goTo={'DerechosYRecursos'}>
+                En este apartado encontrarás todos los recursos a tu disposición de forma totalmente confidencial.
+                </Container>
 
-                <TouchableOpacity style={styles.button}>
-                    <Text style={styles.buttonTitle}>Derechos y recursos disponibles para las víctimas.</Text>
-                    <Image
-                        style={styles.buttonImg}
-                        source={require('../img/logo_cruz_roja.jpg')}
-                    />
-                    <Text style={styles.buttonInfo}>En este apartado encontrarás todos los recursos a tu disposición.</Text>
-                </TouchableOpacity>
+                <Container title={'Ellas necesitan tu voz.'} buttonText={'CÓMO ACTUAR'} goTo={'NecesitanTuVoz'}>
+                Si conoces alguna mujer que pueda estar siendo víctima de violencia de género tu ayuda puede salvarla.
+                </Container>
 
-                <TouchableOpacity style={styles.button}>
-                    <Text style={styles.buttonTitle}>Derechos y recursos disponibles para las víctimas.</Text>
-                    <Image
-                        style={styles.buttonImg}
-                        source={require('../img/logo_cruz_roja.jpg')}
-                    />
-                    <Text style={styles.buttonInfo}>En este apartado encontrarás todos los recursos a tu disposición.</Text>
-                </TouchableOpacity>
+                <Container title={'¿Cómo detectar si eres víctima de violencia de género?'} buttonText={'QUIERO SABER MÁS'} goTo={'Detectar'}>
+                Señales que pueden dar respuesta a esta pregunta.
+                </Container>
+
+                <Container title={'Necesitamos tu ayuda como voluntario/a de Cruz Roja'} buttonText={'COMO COLABORAR'} goTo={'Voluntarios'}>
+                Puedes ayudarnos de muchas maneras diferentes.
+                </Container>
 
                 <StatusBar style="auto" />
             </ScrollView>
@@ -124,10 +104,6 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
     },
-    map: {
-        width: '100%',
-        height: 202,
-    },
     contentTitle: {
         fontSize: 20,
         fontWeight: 'bold',
@@ -145,8 +121,10 @@ const styles = StyleSheet.create({
         display: 'flex',
         flexDirection: 'column',
         width: '90%',
-        marginTop: 20,
-        marginBottom: 20,
+        marginTop: 7,
+        marginBottom: 7,
+        marginLeft: 16,
+        marginRight: 16,
         padding: 10,
         backgroundColor: '#D9D9D9',
     },
