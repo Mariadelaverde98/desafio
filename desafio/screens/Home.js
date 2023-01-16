@@ -1,11 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { Image, StyleSheet, Text, TouchableOpacity, View, ScrollView, RefreshControl } from 'react-native';
+import { StyleSheet, View, ScrollView, RefreshControl } from 'react-native';
 import { addLocation } from '../api';
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/native-stack';
-import { createDrawerNavigator } from '@react-navigation/drawer'
-import MapView, { Marker } from 'react-native-maps';
 import * as Location from 'expo-location';
 import Map from '../components/Map';
 import TextNoEstasSola from '../components/TextNoEstasSola';
@@ -66,19 +62,19 @@ const Home = () => {
                 </ScreenInfo>
 
                 <Container title={'Derechos y recursos disponibles para las víctimas.'} buttonText={'VER MÁS'} goTo={'DerechosYRecursos'}>
-                En este apartado encontrarás todos los recursos a tu disposición de forma totalmente confidencial.
+                    En este apartado encontrarás todos los recursos a tu disposición de forma totalmente confidencial.
                 </Container>
 
                 <Container title={'Ellas necesitan tu voz.'} buttonText={'CÓMO ACTUAR'} goTo={'NecesitanTuVoz'}>
-                Si conoces alguna mujer que pueda estar siendo víctima de violencia de género tu ayuda puede salvarla.
+                    Si conoces alguna mujer que pueda estar siendo víctima de violencia de género tu ayuda puede salvarla.
                 </Container>
 
                 <Container title={'¿Cómo detectar si eres víctima de violencia de género?'} buttonText={'QUIERO SABER MÁS'} goTo={'Detectar'}>
-                Señales que pueden dar respuesta a esta pregunta.
+                    Señales que pueden dar respuesta a esta pregunta.
                 </Container>
 
                 <Container title={'Necesitamos tu ayuda como voluntario/a de Cruz Roja'} buttonText={'COMO COLABORAR'} goTo={'Voluntarios'}>
-                Puedes ayudarnos de muchas maneras diferentes.
+                    Puedes ayudarnos de muchas maneras diferentes.
                 </Container>
 
                 <StatusBar style="auto" />
