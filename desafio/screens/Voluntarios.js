@@ -12,10 +12,18 @@ const Voluntarios = () => {
   const [isFormSent, setisFormSent] = useState(false)
   const [user, setUser] = useState({
     name: '',
-    email: ''
+    email: '',
+    type: ''
   })
 
   const handleChange = (key, value) => {
+    setUser({
+      ...user,
+      [key]: value
+    })
+  }
+
+  const handleOption = (key, value) => {
     setUser({
       ...user,
       [key]: value
@@ -72,6 +80,15 @@ const Voluntarios = () => {
             onChangeText={text => handleChange('email', text)}
             value={user.email}
           />
+          <View style={styles.select}>
+            <TouchableOpacity style={styles.option} onPress={e => handleOption('type', 'Voluntario')}>
+              <Text style={styles.optionText}>Voluntario</Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity style={styles.option} onPress={e => handleOption('type', 'Familiar')}>
+              <Text style={styles.optionText}>Familiar</Text>
+            </TouchableOpacity>
+          </View>
 
           <TouchableOpacity onPress={handleSubmit} style={styles.button}>
             <Text style={styles.buttonText}>
@@ -124,6 +141,23 @@ const styles = StyleSheet.create({
     paddingLeft: 16,
     marginTop: 8,
     marginBottom: 16,
+  },
+  select: {
+    display: 'flex',
+    flexDirection: 'row',
+    width: '65%',
+    justifyContent: 'space-between'
+  },
+  option: {
+    height: 48,
+    backgroundColor: '#EEEEEE',
+    marginBottom: 60,
+    paddingHorizontal: 16,
+    paddingVertical: 13,
+  },
+  optionText: {
+    fontSize: 16,
+    fontWeight: 'bold'
   },
   button: {
     height: 48,
